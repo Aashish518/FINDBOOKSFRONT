@@ -174,7 +174,11 @@ export const Login = () => {
       const json = await response.json();
 
       if (json.authtoken) {
-        Cookies.set('token', json.authtoken);
+        Cookies.set('token', json.authtoken, {
+          path: '/',
+          secure: true,         // HTTPS માટે જરૂરી
+          sameSite: 'None'      // cross-origin માટે જરૂરી
+        });
         showAlert("Registered successfully!","success");
         navigate("/");
       } else {
@@ -207,7 +211,11 @@ export const Login = () => {
       const json = await response.json();
 
       if (json.success && json.authtoken) {
-        Cookies.set('token', json.authtoken);
+        Cookies.set('token', json.authtoken, {
+          path: '/',
+          secure: true,         // HTTPS માટે જરૂરી
+          sameSite: 'None'      // cross-origin માટે જરૂરી
+        });
         showAlert("Login successful!","success");
 
         if (json.user.Role === "Deliveryperson" || json.user.Role === "Admin") {
