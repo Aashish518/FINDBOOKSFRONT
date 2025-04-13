@@ -205,7 +205,8 @@ export const Login = () => {
       });
 
       const json = await response.json();
-      console.log("datadt",json.user)
+      console.log("datadt", json.user)
+      console.log("nttttt",json.authtoken)
       if (json.success && json.authtoken) {
         Cookies.set('token', json.authtoken);
         showAlert("Login successful!","success");
