@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "ROLLUP_NO_NATIVE=true rollup -c",
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "concurrently \"bun run server\" \"bun run dev\"",
     "server": "cd ../backend && nodemon index.js"
   },
   "dependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.40.0",
     "concurrently": "^9.1.2",
     "js-cookie": "^3.0.5",
     "json-server": "^1.0.0-beta.3",
@@ -36,6 +37,7 @@
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
-    "globals": "^15.12.0"
+    "globals": "^15.12.0",
+    "rollup": "^4.40.0"
   }
 }
