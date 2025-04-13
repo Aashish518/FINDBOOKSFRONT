@@ -177,7 +177,7 @@ export const Login = () => {
         Cookies.set('token', json.authtoken, {
           path: '/',
           secure: true, // only over HTTPS
-          sameSite: 'Strict' // or 'Lax' or 'None' depending on frontend-backend setup
+          sameSite: 'None' // or 'Lax' or 'None' depending on frontend-backend setup
         });
 
         showAlert("Registered successfully!","success");
@@ -216,7 +216,7 @@ export const Login = () => {
         Cookies.set('token', json.authtoken, {
           path: '/',
           secure: true, // only over HTTPS
-          sameSite: 'Strict' // or 'Lax' or 'None' depending on frontend-backend setup
+          sameSite: 'None' // or 'Lax' or 'None' depending on frontend-backend setup
         });
 
         showAlert("Login successful!","success");
