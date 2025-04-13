@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "concurrently \"bun run server\" \"bun run dev\"",
+    "start": "vite preview",
     "server": "cd ../backend && nodemon index.js"
   },
   
