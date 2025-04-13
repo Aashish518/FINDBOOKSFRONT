@@ -8,9 +8,5 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:2606', // Replace with your backend URL
     },
-  },
-  preview: {
-    port: process.env.PORT || 5173,
-    host: true
   }
 })

@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "bunx vite",
-    "build": "bunx vite build",
-    "start": "bunx vite preview",
+    "dev": "vite",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "start": "concurrently \"bun run server\" \"bun run dev\"",
     "server": "cd ../backend && nodemon index.js"
   },
   
