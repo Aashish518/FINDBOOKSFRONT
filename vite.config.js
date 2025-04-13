@@ -8,5 +8,8 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:2606', // Replace with your backend URL
     },
+    build: {
+      outDir: 'dist', // Make sure this matches your deployment setup
+    },
   }
 })
