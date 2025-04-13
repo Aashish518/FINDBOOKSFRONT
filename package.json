@@ -11,7 +11,6 @@
     "start": "concurrently \"bun run server\" \"bun run dev\"",
     "server": "cd ../backend && nodemon index.js"
   },
-  
   "dependencies": {
     "concurrently": "^9.1.2",
     "js-cookie": "^3.0.5",
