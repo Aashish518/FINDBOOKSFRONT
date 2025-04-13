@@ -174,7 +174,12 @@ export const Login = () => {
       const json = await response.json();
 
       if (json.authtoken) {
-        Cookies.set('token', json.authtoken);
+        Cookies.set('token', json.authtoken, {
+          path: '/',
+          secure: true, // only over HTTPS
+          sameSite: 'Strict' // or 'Lax' or 'None' depending on frontend-backend setup
+        });
+
         showAlert("Registered successfully!","success");
         navigate("/");
       } else {
@@ -208,7 +213,12 @@ export const Login = () => {
       console.log("datadt", json.user)
       console.log("nttttt",json.authtoken)
       if (json.success && json.authtoken) {
-        Cookies.set('token', json.authtoken);
+        Cookies.set('token', json.authtoken, {
+          path: '/',
+          secure: true, // only over HTTPS
+          sameSite: 'Strict' // or 'Lax' or 'None' depending on frontend-backend setup
+        });
+
         showAlert("Login successful!","success");
 
         if (json.user.Role === "Deliveryperson" || json.user.Role === "Admin") {
