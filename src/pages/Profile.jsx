@@ -23,6 +23,7 @@ export const Profile = () => {
     // 🟢 Fetch User Profile Data
     useEffect(() => {
         const fetchProfile = async () => {
+            console.log("mmmcccccc",token)
             try {
                 const response = await fetch(`${backlink}/api/profile`, {
                     headers: {
