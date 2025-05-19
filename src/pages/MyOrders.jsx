@@ -17,7 +17,7 @@ export const MyOrders = () => {
   useEffect(() => {
     const fetchCarts = async () => {
       try {
-        const response = await fetch("http://localhost:2606/api/Order", {
+        const response = await fetch(`${process.env.link}/api/Order`, {
           credentials: "include",
         });
 
@@ -42,7 +42,7 @@ export const MyOrders = () => {
     if (newStatus === "Cancelled") {
       orderId.books.map((books)=>{books.user_id})
       try {
-        const response = await fetch(`http://localhost:2606/api/${newStatus}/SellOrders`, {
+        const response = await fetch(`${process.env.link}/api/${newStatus}/SellOrders`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ resellerid: resellerid, bookid: booksdetail._id }),
@@ -61,7 +61,7 @@ export const MyOrders = () => {
     }
     try {
       const response = await fetch(
-        `http://localhost:2606/api/${orderId}/status`,
+        `${process.env.link}/api/${orderId}/status`,
         {
           method: "PUT",
           headers: {
@@ -172,7 +172,7 @@ export const MyOrders = () => {
                               <div key={bookItem._id} className="book-card">
                                 <div className="book-image">
                                   <img
-                                    src={`http://localhost:2606/${bookItem.BookImageURL}`}
+                                    src={`${process.env.link}/${bookItem.BookImageURL}`}
                                     alt={bookItem.BookName}
                                   />
                                 </div>

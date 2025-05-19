@@ -49,7 +49,7 @@ export const Login = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:2606/api/registerotp", {
+      const response = await fetch(`${process.env.link}/api/registerotp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: Regcredentials.email }),
@@ -78,7 +78,7 @@ export const Login = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:2606/api/verifyotp", {
+      const res = await fetch(`${process.env.link}/api/verifyotp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: Regcredentials.email, otp }),
@@ -174,7 +174,7 @@ export const Login = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:2606/api/User", {
+      const response = await fetch(`${process.env.link}/api/User`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Regcredentials),
@@ -208,7 +208,7 @@ export const Login = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:2606/api/login", {
+      const response = await fetch(`${process.env.link}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Logcredentials),

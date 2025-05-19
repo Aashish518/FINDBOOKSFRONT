@@ -41,7 +41,7 @@ export const ResellDeliveryDetail = () => {
         }
 
         try {
-            const res = await fetch(`http://localhost:2606/api/${"reselldelivery"}/forgot-password`, {
+            const res = await fetch(`${process.env.link}/api/${"reselldelivery"}/forgot-password`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email }),
@@ -61,7 +61,7 @@ export const ResellDeliveryDetail = () => {
 
     const handleVerifyOtp = async () => {
         try {
-            const res = await fetch("http://localhost:2606/api/verify-otp", {
+            const res = await fetch(`${process.env.link}/api/verify-otp`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, otp }),
@@ -82,7 +82,7 @@ export const ResellDeliveryDetail = () => {
         if (timer > 0) return;
 
         try {
-            const res = await fetch("http://localhost:2606/api/resend-otp", {
+            const res = await fetch(`${process.env.link}/api/resend-otp`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email }),
@@ -101,7 +101,7 @@ export const ResellDeliveryDetail = () => {
 
     const updateOrderStatus = async (resellerid, newStatus) => {
             try {
-                const response = await fetch(`http://localhost:2606/api/${newStatus}/SellOrders`, {
+                const response = await fetch(`${process.env.link}/api/${newStatus}/SellOrders`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ resellerid: resellerid, bookid: booksdetail._id }),
@@ -122,7 +122,7 @@ export const ResellDeliveryDetail = () => {
     
     const addpaymentdata = async() => {
         try {
-            const response = await fetch(`http://localhost:2606/api/${"debit"}/codpayment`, {
+            const response = await fetch(`${process.env.link}/api/${"debit"}/codpayment`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

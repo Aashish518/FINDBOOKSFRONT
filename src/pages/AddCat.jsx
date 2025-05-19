@@ -15,7 +15,7 @@ export const AddCat = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch("http://localhost:2606/api/Category");
+      const response = await fetch(`${process.env.link}/api/Category`);
       const data = await response.json();
       setCategories(data);
     } catch (error) {
@@ -26,7 +26,7 @@ export const AddCat = () => {
   const handleAddCategory = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:2606/api/Category", {
+      const response = await fetch(`${process.env.link}/api/Category`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ Category_Name: categoryName })
@@ -50,7 +50,7 @@ export const AddCat = () => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:2606/api/Subcategory`, {
+      const response = await fetch(`${process.env.link}/api/Subcategory`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ Subcategory_Name: subcategoryName ,Category_id : selectedCategory })

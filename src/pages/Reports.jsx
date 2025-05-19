@@ -16,7 +16,7 @@ const Reports = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await fetch("http://localhost:2606/api/report", {
+        const response = await fetch(`${process.env.link}/api/report`, {
           credentials: "include",
         });
         const data = await response.json();
@@ -35,7 +35,7 @@ const Reports = () => {
 
   const downloadReport = async (reportId) => {
     try {
-      const response = await fetch(`http://localhost:2606/api/report/${reportId}/download`, {
+      const response = await fetch(`${process.env.link}/api/report/${reportId}/download`, {
         credentials: "include",
       });
       const blob = await response.blob();

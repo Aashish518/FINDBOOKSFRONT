@@ -18,7 +18,7 @@ export const Cart = () => {
 
     const handleRemoveItem = async (bookid) => {
         try {
-            const response = await fetch("http://localhost:2606/api/Cart", {
+            const response = await fetch(`${process.env.link}/api/Cart`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ book_id: bookid }),
@@ -52,7 +52,7 @@ export const Cart = () => {
         const fetchCarts = async () => {
             setLoading(true);
             try {
-                const response = await fetch("http://localhost:2606/api/Cart", {
+                const response = await fetch(`${process.env.link}/api/Cart`, {
                     credentials: "include",
                 });
                 const json = await response.json();
@@ -78,7 +78,7 @@ export const Cart = () => {
 
     const handleQuantityChange = async (bookid, action) => {
         try {
-            const response = await fetch("http://localhost:2606/api/updatequantity", {
+            const response = await fetch(`${process.env.link}/api/updatequantity`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ book_id: bookid, action }),
@@ -107,7 +107,7 @@ export const Cart = () => {
 
     const clearcart = async() => {
         try {
-            const response = await fetch("http://localhost:2606/api/Cart", {
+            const response = await fetch(`${process.env.link}/api/Cart`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -180,7 +180,7 @@ export const Cart = () => {
                                                     {item.Isoldbook ? "Resell" : "New"}
                                                 </span>
                                                 <img
-                                                    src={`http://localhost:2606/${item.BookImageURL}`}
+                                                    src={`${process.env.link}/${item.BookImageURL}`}
                                                     alt={item.BookName}
                                                     className="item-image"
                                                 />

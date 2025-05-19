@@ -17,8 +17,8 @@ export const BooksPage = () => {
     const fetchBooks = async () => {
       try {
         const [bookRes, sellOrderRes] = await Promise.all([
-          fetch(`http://localhost:2606/api/${subcategory}/Books`),
-          fetch("http://localhost:2606/api/resellerbook")
+          fetch(`${process.env.link}/api/${subcategory}/Books`),
+          fetch(`${process.env.link}/api/resellerbook`)
         ]);
   
         const [bookData, sellOrderData] = await Promise.all([

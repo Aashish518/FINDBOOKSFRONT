@@ -21,7 +21,7 @@ export const AdminOrders = () => {
   useEffect(() => {
     const getOrders = async () => {
       try {
-        const response = await fetch("http://localhost:2606/api/Orders", {
+        const response = await fetch(`${process.env.link}/api/Orders`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -36,7 +36,7 @@ export const AdminOrders = () => {
     
     const GetUsers = async () => {
       try {
-        const response = await fetch("http://localhost:2606/api/AllUser", {
+        const response = await fetch(`${process.env.link}/api/AllUser`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -50,7 +50,7 @@ export const AdminOrders = () => {
 
     const fetchBook = async () => {
       try {
-        const res = await fetch("http://localhost:2606/api/Book");
+        const res = await fetch(`${process.env.link}/api/Book`);
         const data = await res.json();
         setBookdata(data);
       } catch (error) {

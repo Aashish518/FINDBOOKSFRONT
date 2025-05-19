@@ -59,8 +59,8 @@ export const Book = () => {
   const fetchBook = async () => {
     try {
       const [bookRes, sellOrderRes] = await Promise.all([
-        fetch("http://localhost:2606/api/Book"),
-        fetch("http://localhost:2606/api/resellerbook")
+        fetch(`${process.env.link}/api/Book`),
+        fetch(`${process.env.link}/api/resellerbook`)
       ]);
 
       const [bookData, sellOrderData] = await Promise.all([
@@ -138,7 +138,7 @@ export const Book = () => {
 
       if (reseller) {
         try {
-          await fetch(`http://localhost:2606/api/resellerbook/${reseller._id}`, {
+          await fetch(`${process.env.link}/api/resellerbook/${reseller._id}`, {
             method: 'DELETE',
           });
           console.log(`Deleted reseller book: ${book.BookName}`);

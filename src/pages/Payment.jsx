@@ -31,7 +31,7 @@ export const Payment = () => {
       order_id: data.id,
       handler: async (response) => {
         try {
-          const verifyResponse = await fetch("http://localhost:2606/api/verify", {
+          const verifyResponse = await fetch(`${process.env.link}/api/verify`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -73,7 +73,7 @@ export const Payment = () => {
 
   const payment = async () => {
     try {
-      const response = await fetch("http://localhost:2606/api/orders", {
+      const response = await fetch(`${process.env.link}/api/orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: total + pcharge + deliveryCharge }),
@@ -93,7 +93,7 @@ export const Payment = () => {
 
   const addorder = async () => {
     try {
-      const response = await fetch("http://localhost:2606/api/addorder", {
+      const response = await fetch(`${process.env.link}/api/addorder`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -112,7 +112,7 @@ export const Payment = () => {
 
   const clearcart = async () => {
     try {
-      await fetch("http://localhost:2606/api/Cart", {
+      await fetch(`${process.env.link}/api/Cart`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -125,7 +125,7 @@ export const Payment = () => {
   useEffect(() => {
     const fetchCarts = async () => {
       try {
-        const response = await fetch("http://localhost:2606/api/CurrentOrder", {
+        const response = await fetch(`${process.env.link}/api/CurrentOrder`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -178,7 +178,7 @@ export const Payment = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:2606/api/credit/codpayment", {
+      const response = await fetch(`${process.env.link}/api/credit/codpayment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

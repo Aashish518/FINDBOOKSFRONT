@@ -27,7 +27,7 @@ export const BookForm = ({ UserRole }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:2606/api/Category");
+        const response = await fetch(`${process.env.link}/api/Category`);
         const data = await response.json();
         setCategories(data);
       } catch (error) {
@@ -44,7 +44,7 @@ export const BookForm = ({ UserRole }) => {
     setErrors((prevErrors) => ({ ...prevErrors, Category: "" })); // Clear errors
 
     try {
-      const response = await fetch(`http://localhost:2606/api/${categoryId}/Subcategory`);
+      const response = await fetch(`${process.env.link}/api/${categoryId}/Subcategory`);
       const data = await response.json();
       setSubcategories(Array.isArray(data) ? data : []);
     } catch (error) {

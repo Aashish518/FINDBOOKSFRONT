@@ -54,7 +54,7 @@ const DeliveryDashboard = () => {
   useEffect(() => {
     const getOrders = async () => {
       try {
-        const response = await fetch("http://localhost:2606/api/Orders", {
+        const response = await fetch(`${process.env.link}/api/Orders`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -70,7 +70,7 @@ const DeliveryDashboard = () => {
 
     const getSellOrder = async () => {
       try {
-        const response = await fetch("http://localhost:2606/api/SellOrder", {
+        const response = await fetch(`${process.env.link}/api/SellOrder`, {
           credentials: "include",
         });
         const json = await response.json();

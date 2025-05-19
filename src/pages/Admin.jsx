@@ -19,7 +19,7 @@ const Admin = () => {
         try {
             setLoading(true);
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:2606/api/report/generate', {
+            const response = await fetch(`${process.env.link}/api/report/generate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

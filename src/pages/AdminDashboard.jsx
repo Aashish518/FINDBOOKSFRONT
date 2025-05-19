@@ -60,7 +60,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const GetUser = async () => {
       try {
-        const response = await fetch("http://localhost:2606/api/User", {
+        const response = await fetch(`${process.env.link}/api/User`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -76,7 +76,7 @@ const AdminDashboard = () => {
     GetUser();
     const getOrders = async () => {
       try {
-        const response = await fetch("http://localhost:2606/api/Order", {
+        const response = await fetch(`${process.env.link}/api/Order`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -92,7 +92,7 @@ const AdminDashboard = () => {
 
     const GetUsers = async () => {
       try {
-        const response = await fetch("http://localhost:2606/api/AllUser", {
+        const response = await fetch(`${process.env.link}/api/AllUser`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -108,8 +108,8 @@ const AdminDashboard = () => {
     const fetchBook = async () => {
       try {
         const [bookRes, sellOrderRes] = await Promise.all([
-          fetch("http://localhost:2606/api/Book"),
-          fetch("http://localhost:2606/api/resellerbook")
+          fetch(`${process.env.link}/api/Book`),
+          fetch(`${process.env.link}/api/resellerbook`)
         ]);
 
         const [bookData, sellOrderData] = await Promise.all([
@@ -134,7 +134,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const getRevenue = async () => {
       try {
-        const res = await fetch("http://localhost:2606/api/verify", {
+        const res = await fetch(`${process.env.link}/api/verify`, {
           credentials: "include",
         });
         const data = await res.json();
@@ -181,7 +181,7 @@ const AdminDashboard = () => {
   
       try {
         const response = await fetch(
-          `http://localhost:2606/api/${orderId}/Order`,
+          `${process.env.link}/api/${orderId}/Order`,
           {
             method: "PUT",
             headers: {
@@ -234,7 +234,7 @@ const AdminDashboard = () => {
   const generateReport = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:2606/api/report/generate', {
+      const response = await fetch(`${process.env.link}/api/report/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

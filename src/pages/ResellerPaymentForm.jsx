@@ -75,7 +75,7 @@ export const ResellerPaymentForm = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:2606/api/${UserRole}/Book`, {
+            const response = await fetch(`${process.env.link}/api/${UserRole}/Book`, {
                 method: "POST",
                 body: formDataToSend,
                 credentials: "include",
@@ -85,7 +85,7 @@ export const ResellerPaymentForm = () => {
             const bookid = json.book?._id;
             if (bookid) {
                 try {
-                    const response = await fetch("http://localhost:2606/api/ResellerPaymentForm", {
+                    const response = await fetch(`${process.env.link}/api/ResellerPaymentForm`, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ ...formData, bookid }),

@@ -161,7 +161,7 @@ export const Useraddress = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:2606/api/Order", {
+      const response = await fetch(`${process.env.link}/api/Order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

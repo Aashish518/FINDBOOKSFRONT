@@ -20,7 +20,7 @@ export const Profile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await fetch("http://localhost:2606/api/profile", {
+                const response = await fetch(`${process.env.link}/api/profile`, {
                     credentials: "include",
                 });
                 const json = await response.json();

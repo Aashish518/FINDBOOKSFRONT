@@ -32,7 +32,7 @@ export const EditProfile = () => {
     const [firstName, lastName] = formData.name.split(" "); // Split name into first and last
 
     try {
-      const response = await fetch("http://localhost:2606/api/User", {
+      const response = await fetch(`${process.env.link}/api/User`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

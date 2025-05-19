@@ -42,7 +42,7 @@ export const DeliveryDetail = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:2606/api/${"deliverydetail"}/forgot-password`, {
+      const res = await fetch(`${process.env.link}/api/${"deliverydetail"}/forgot-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -62,7 +62,7 @@ export const DeliveryDetail = () => {
 
   const handleVerifyOtp = async () => {
     try {
-      const res = await fetch(`http://localhost:2606/api/verify-otp`, {
+      const res = await fetch(`${process.env.link}/api/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),
@@ -83,7 +83,7 @@ export const DeliveryDetail = () => {
     if (timer > 0) return;
 
     try {
-      const res = await fetch("http://localhost:2606/api/resend-otp", {
+      const res = await fetch(`${process.env.link}/api/resend-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -103,7 +103,7 @@ export const DeliveryDetail = () => {
   const updateOrderStatus = async (orderId, newStatus) => {
     try {
       const response = await fetch(
-        `http://localhost:2606/api/${orderId}/Order`,
+        `${process.env.link}/api/${orderId}/Order`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -123,7 +123,7 @@ export const DeliveryDetail = () => {
     }
     if (paymentdetail[0].payment_method === "COD") {
       try {
-        const response = await fetch("http://localhost:2606/api/codpayment", {
+        const response = await fetch(`${process.env.link}/api/codpayment`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ paymentid: paymentdetail[0]._id }),

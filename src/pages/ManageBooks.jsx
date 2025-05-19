@@ -14,8 +14,8 @@ export const ManageBooks = () => {
   const fetchBook = async () => {
     try {
       const [bookRes, sellOrderRes] = await Promise.all([
-        fetch("http://localhost:2606/api/Book"),
-        fetch("http://localhost:2606/api/resellerbook")
+        fetch(`${process.env.link}/api/Book`),
+        fetch(`${process.env.link}/api/resellerbook`)
       ]);
 
       const [bookData, sellOrderData] = await Promise.all([
@@ -59,7 +59,7 @@ export const ManageBooks = () => {
     if (!window.confirm("Are you sure you want to delete this book?")) return;
 
     try {
-      const response = await fetch("http://localhost:2606/api/Book", {
+      const response = await fetch(`${process.env.link}/api/Book`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -136,7 +136,7 @@ export const ManageBooks = () => {
                     <td className="centered">{index + 1}</td>
                     <td>
                       <img
-                        src={`http://localhost:2606/${product.BookImageURL}`}
+                        src={`${process.env.link}/${product.BookImageURL}`}
                         alt={product.BookName}
                         className="bookImage"
                       />

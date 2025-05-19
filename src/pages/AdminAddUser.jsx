@@ -60,7 +60,7 @@ export const AdminAddUser = () => {
     console.log("User Data Submitted:", user);
 
     try {
-      const response = await fetch("http://localhost:2606/api/User", {
+      const response = await fetch(`${process.env.link}/api/User`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

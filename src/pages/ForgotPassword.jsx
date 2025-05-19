@@ -46,7 +46,7 @@ function ForgotPassword() {
 
     setEmailError("");
 
-    await fetch(`http://localhost:2606/api/${"forgotpassword"}/forgot-password`, {
+    await fetch(`${process.env.link}/api/${"forgotpassword"}/forgot-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
@@ -66,7 +66,7 @@ function ForgotPassword() {
 
     setOtpError("");
 
-    const res = await fetch("http://localhost:2606/api/verify-otp", {
+    const res = await fetch(`${process.env.link}/api/verify-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, otp }),
@@ -89,7 +89,7 @@ function ForgotPassword() {
 
     setPasswordError("");
 
-    const response = await fetch("http://localhost:2606/api/reset-password", {
+    const response = await fetch(`${process.env.link}/api/reset-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, newPassword }),

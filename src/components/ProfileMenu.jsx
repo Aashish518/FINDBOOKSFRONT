@@ -17,7 +17,7 @@ export function ProfileMenu() {
     useEffect(() => {
         const GetUser = async () => {
             try {
-                const response = await fetch("http://localhost:2606/api/User", {
+                const response = await fetch(`${process.env.link}/api/User`, {
                     credentials: "include",
                 });
 

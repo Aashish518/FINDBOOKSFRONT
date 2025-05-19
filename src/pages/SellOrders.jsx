@@ -17,7 +17,7 @@ export const SellOrders = () => {
   useEffect(() => {
     const getSellOrder = async () => {
       try {
-        const response = await fetch("http://localhost:2606/api/SellOrders", {
+        const response = await fetch(`${process.env.link}/api/SellOrders`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -38,7 +38,7 @@ export const SellOrders = () => {
 
   const updatestatus = async (resellerid, bookid) => {
     try {
-      const response = await fetch(`http://localhost:2606/api/Book`, {
+      const response = await fetch(`${process.env.link}/api/Book`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ bookId: bookid }),
@@ -58,7 +58,7 @@ export const SellOrders = () => {
 
 setTimeout(async ()=> {
     try{
-      const response = await fetch(`http://localhost:2606/api/ResellerPaymentForm/${resellerid}`, {
+      const response = await fetch(`${process.env.link}/api/ResellerPaymentForm/${resellerid}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ resellerid: resellerid }),
@@ -155,7 +155,7 @@ setTimeout(async ()=> {
                             <div className="book-card">
                               <div className="book-image">
                                 <img
-                                  src={`http://localhost:2606/${bookdata.BookImageURL}`}
+                                  src={`${process.env.link}/${bookdata.BookImageURL}`}
                                   alt={bookdata.BookName}
                                 />
                               </div>
