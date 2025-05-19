@@ -1,5 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import Cookies from "js-cookie";
+const token = Cookies.get("token");
+
 
 const AuthContext = createContext();
 
@@ -10,9 +12,13 @@ export const AuthProvider = ({ children }) => {
     // Function to fetch user data
     const getUser = async () => {
         try {
-            const response = await fetch(`http://localhost:2606/api/User?t=${Date.now()}`, {
+            const response = await fetch(`${backlink}/api/User?t=${Date.now()}`, {
                 method: "GET",
                 credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                  },
             });
 
             if (!response.ok) {
