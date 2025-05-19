@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../pages-css/ViewPayment.css";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const ViewPayment = () => {
     const [payments, setPayments] = useState([]);
@@ -8,7 +10,7 @@ export const ViewPayment = () => {
     useEffect(() => {
         const fetchPayments = async () => {
             try {
-                const response = await fetch(`${process.env.link}/api/verify`, {
+                const response = await fetch(`${backlink}/api/verify`, {
                     credentials: "include",
                 });
                 const json = await response.json();

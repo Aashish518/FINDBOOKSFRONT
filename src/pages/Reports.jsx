@@ -5,6 +5,8 @@ import { Download, FileText, Calendar, TrendingUp, DollarSign, Users } from 'luc
 import "../pages-css/Reports.css";
 import { useAlert } from "../Context/AlertContext";
 import Load from "../components/Load"
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 const Reports = () => {
   const { user, loading } = useAuth();
@@ -16,7 +18,7 @@ const Reports = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/report`, {
+        const response = await fetch(`${backlink}/api/report`, {
           credentials: "include",
         });
         const data = await response.json();
@@ -35,7 +37,7 @@ const Reports = () => {
 
   const downloadReport = async (reportId) => {
     try {
-      const response = await fetch(`${process.env.link}/api/report/${reportId}/download`, {
+      const response = await fetch(`${backlink}/api/report/${reportId}/download`, {
         credentials: "include",
       });
       const blob = await response.blob();

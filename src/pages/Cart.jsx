@@ -6,6 +6,8 @@ import { useCart } from "../Context/order";
 import { FaTrashAlt, FaShoppingCart, FaArrowRight, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const Cart = () => {
     const [carts, setCarts] = useState([]);
@@ -18,7 +20,7 @@ export const Cart = () => {
 
     const handleRemoveItem = async (bookid) => {
         try {
-            const response = await fetch(`${process.env.link}/api/Cart`, {
+            const response = await fetch(`${backlink}/api/Cart`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ book_id: bookid }),
@@ -52,7 +54,7 @@ export const Cart = () => {
         const fetchCarts = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`${process.env.link}/api/Cart`, {
+                const response = await fetch(`${backlink}/api/Cart`, {
                     credentials: "include",
                 });
                 const json = await response.json();
@@ -78,7 +80,7 @@ export const Cart = () => {
 
     const handleQuantityChange = async (bookid, action) => {
         try {
-            const response = await fetch(`${process.env.link}/api/updatequantity`, {
+            const response = await fetch(`${backlink}/api/updatequantity`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ book_id: bookid, action }),
@@ -107,7 +109,7 @@ export const Cart = () => {
 
     const clearcart = async() => {
         try {
-            const response = await fetch(`${process.env.link}/api/Cart`, {
+            const response = await fetch(`${backlink}/api/Cart`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -180,7 +182,7 @@ export const Cart = () => {
                                                     {item.Isoldbook ? "Resell" : "New"}
                                                 </span>
                                                 <img
-                                                    src={`${process.env.link}/${item.BookImageURL}`}
+                                                    src={`${backlink}/${item.BookImageURL}`}
                                                     alt={item.BookName}
                                                     className="item-image"
                                                 />

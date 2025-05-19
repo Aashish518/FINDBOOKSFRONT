@@ -5,6 +5,8 @@ import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import '../pages-css/Admin.css';
 import { useAlert } from '../Context/AlertContext';
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 const Admin = () => {
     const [report, setReport] = useState(null);
@@ -19,7 +21,7 @@ const Admin = () => {
         try {
             setLoading(true);
             const token = localStorage.getItem('token');
-            const response = await fetch(`${process.env.link}/api/report/generate`, {
+            const response = await fetch(`${backlink}/api/report/generate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

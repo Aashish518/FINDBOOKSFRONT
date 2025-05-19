@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "../pages-css/AdminDashboard.css";
 import { useViewOrder } from "../Context/OrderDetail";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const AdminOrders = () => {
   const [bookdata, setBookdata] = useState([]);
@@ -21,7 +23,7 @@ export const AdminOrders = () => {
   useEffect(() => {
     const getOrders = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/Orders`, {
+        const response = await fetch(`${backlink}/api/Orders`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -36,7 +38,7 @@ export const AdminOrders = () => {
     
     const GetUsers = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/AllUser`, {
+        const response = await fetch(`${backlink}/api/AllUser`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -50,7 +52,7 @@ export const AdminOrders = () => {
 
     const fetchBook = async () => {
       try {
-        const res = await fetch(`${process.env.link}/api/Book`);
+        const res = await fetch(`${backlink}/api/Book`);
         const data = await res.json();
         setBookdata(data);
       } catch (error) {

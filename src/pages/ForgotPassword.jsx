@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../pages-css/ForgotPassword.css";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -46,7 +48,7 @@ function ForgotPassword() {
 
     setEmailError("");
 
-    await fetch(`${process.env.link}/api/${"forgotpassword"}/forgot-password`, {
+    await fetch(`${backlink}/api/${"forgotpassword"}/forgot-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
@@ -66,7 +68,7 @@ function ForgotPassword() {
 
     setOtpError("");
 
-    const res = await fetch(`${process.env.link}/api/verify-otp`, {
+    const res = await fetch(`${backlink}/api/verify-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, otp }),
@@ -89,7 +91,7 @@ function ForgotPassword() {
 
     setPasswordError("");
 
-    const response = await fetch(`${process.env.link}/api/reset-password`, {
+    const response = await fetch(`${backlink}/api/reset-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, newPassword }),

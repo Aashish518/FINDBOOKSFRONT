@@ -5,6 +5,8 @@ import { ProfileMenu } from "../components/ProfileMenu";
 import { Package, Calendar, CreditCard, Truck, XCircle } from "lucide-react";
 import Load from "../components/Load";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const SellOrders = () => {
   const [books, setBooks] = useState([]);
@@ -17,7 +19,7 @@ export const SellOrders = () => {
   useEffect(() => {
     const getSellOrder = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/SellOrders`, {
+        const response = await fetch(`${backlink}/api/SellOrders`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -38,7 +40,7 @@ export const SellOrders = () => {
 
   const updatestatus = async (resellerid, bookid) => {
     try {
-      const response = await fetch(`${process.env.link}/api/Book`, {
+      const response = await fetch(`${backlink}/api/Book`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ bookId: bookid }),
@@ -58,7 +60,7 @@ export const SellOrders = () => {
 
 setTimeout(async ()=> {
     try{
-      const response = await fetch(`${process.env.link}/api/ResellerPaymentForm/${resellerid}`, {
+      const response = await fetch(`${backlink}/api/ResellerPaymentForm/${resellerid}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ resellerid: resellerid }),
@@ -155,7 +157,7 @@ setTimeout(async ()=> {
                             <div className="book-card">
                               <div className="book-image">
                                 <img
-                                  src={`${process.env.link}/${bookdata.BookImageURL}`}
+                                  src={`${backlink}/${bookdata.BookImageURL}`}
                                   alt={bookdata.BookName}
                                 />
                               </div>

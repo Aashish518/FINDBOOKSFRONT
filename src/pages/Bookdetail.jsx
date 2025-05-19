@@ -6,6 +6,8 @@ import { FaStar, FaShoppingCart, FaCheckCircle, FaBookOpen, FaCalendarAlt, FaUse
 import Cookies from "js-cookie";
 import { ShieldCheck, Star, CreditCard, Truck, Leaf } from "lucide-react";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const Bookdetail = () => {
   const location = useLocation();
@@ -48,7 +50,7 @@ export const Bookdetail = () => {
 
   const fetchAverageRating = async () => {
     try {
-      const response = await fetch(`${process.env.link}/api/Ratings/average/${book._id}`);
+      const response = await fetch(`${backlink}/api/Ratings/average/${book._id}`);
       const data = await response.json();
       setAvgRating(parseFloat(data.averageRating) || 0);
     } catch (error) {
@@ -66,7 +68,7 @@ export const Bookdetail = () => {
 
     setRating(currentRating);
     try {
-      const response = await fetch(`${process.env.link}/api/Ratings`, {
+      const response = await fetch(`${backlink}/api/Ratings`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ book_id: book._id, rate: currentRating }),
@@ -96,7 +98,7 @@ export const Bookdetail = () => {
       Navigate("/login");
     } else {
       try {
-        const response = await fetch(`${process.env.link}/api/Cart`, {
+        const response = await fetch(`${backlink}/api/Cart`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ book_id: book._id, cart_quantity: 1 }),
@@ -121,7 +123,7 @@ export const Bookdetail = () => {
       Navigate("/login");
     } else {
       try {
-        const response = await fetch(`${process.env.link}/api/Cart`, {
+        const response = await fetch(`${backlink}/api/Cart`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ book_id: book._id, cart_quantity: 1 }),
@@ -187,7 +189,7 @@ export const Bookdetail = () => {
         <div className="bookdetails-container">
           <div className="book-first">
             <div className="book-img">
-              <img src={`${process.env.link}/${book.BookImageURL}`} alt={book.BookName} />
+              <img src={`${backlink}/${book.BookImageURL}`} alt={book.BookName} />
             </div>
             <div className="averagerating-container">
               <span className="stars-container">{renderStars(avgRating)}</span>

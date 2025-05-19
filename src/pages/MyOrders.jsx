@@ -5,6 +5,8 @@ import { ProfileMenu } from "../components/ProfileMenu";
 import { Package, Calendar, CreditCard, Truck, XCircle } from "lucide-react";
 import Load from "../components/Load";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const MyOrders = () => {
   const [order, setOrder] = useState([]);
@@ -17,7 +19,7 @@ export const MyOrders = () => {
   useEffect(() => {
     const fetchCarts = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/Order`, {
+        const response = await fetch(`${backlink}/api/Order`, {
           credentials: "include",
         });
 
@@ -42,7 +44,7 @@ export const MyOrders = () => {
     if (newStatus === "Cancelled") {
       orderId.books.map((books)=>{books.user_id})
       try {
-        const response = await fetch(`${process.env.link}/api/${newStatus}/SellOrders`, {
+        const response = await fetch(`${backlink}/api/${newStatus}/SellOrders`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ resellerid: resellerid, bookid: booksdetail._id }),
@@ -61,7 +63,7 @@ export const MyOrders = () => {
     }
     try {
       const response = await fetch(
-        `${process.env.link}/api/${orderId}/status`,
+        `${backlink}/api/${orderId}/status`,
         {
           method: "PUT",
           headers: {
@@ -172,7 +174,7 @@ export const MyOrders = () => {
                               <div key={bookItem._id} className="book-card">
                                 <div className="book-image">
                                   <img
-                                    src={`${process.env.link}/${bookItem.BookImageURL}`}
+                                    src={`${backlink}/${bookItem.BookImageURL}`}
                                     alt={bookItem.BookName}
                                   />
                                 </div>

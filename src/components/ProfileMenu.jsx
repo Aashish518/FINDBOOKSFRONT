@@ -7,6 +7,8 @@ import { ImBooks } from "react-icons/im";
 import { MdOutlineSell } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { FaUserCircle } from 'react-icons/fa';
+import { Linkurl } from "./Linkurl";
+const backlink = Linkurl();
 
 export function ProfileMenu() {
     const [role, setRole] = useState(null);
@@ -17,7 +19,7 @@ export function ProfileMenu() {
     useEffect(() => {
         const GetUser = async () => {
             try {
-                const response = await fetch(`${process.env.link}/api/User`, {
+                const response = await fetch(`${backlink}/api/User`, {
                     credentials: "include",
                 });
 

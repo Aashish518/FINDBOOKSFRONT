@@ -9,6 +9,8 @@ import '../components-css/Navbar.css';
 import Cookies from "js-cookie";
 import { Category } from "../pages/Category";
 import { useNavigate } from "react-router-dom";
+import { Linkurl } from "./Linkurl";
+const backlink = Linkurl();
 
 export const Navbar = () => {
   const [menuActive, setMenuActive] = useState(false);
@@ -21,7 +23,7 @@ export const Navbar = () => {
   useEffect(() => {
     const GetUser = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/User`, {
+        const response = await fetch(`${backlink}/api/User`, {
           credentials: "include",
         });
 

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../pages-css/ManageReseller.css";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 const ManageResellers = () => {
     const [resellers, setResellers] = useState([]);
@@ -12,7 +14,7 @@ const ManageResellers = () => {
 
     const fetchResellers = async () => {
         try {
-            const response = await fetch(`${process.env.link}/api/resellerbook`);
+            const response = await fetch(`${backlink}/api/resellerbook`);
             const data = await response.json();
             setResellers(data.resellers);
         } catch (error) {

@@ -5,6 +5,8 @@ import { CreditCard, Package, Truck, Shield, ArrowLeft } from "lucide-react";
 import { Navbar } from "../components/Navbar";
 import { useAlert } from "../Context/AlertContext";
 import { deliveryChargesArray } from "./Useraddress";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const Payment = () => {
   const [OrderData, setOrderData] = useState();
@@ -31,7 +33,7 @@ export const Payment = () => {
       order_id: data.id,
       handler: async (response) => {
         try {
-          const verifyResponse = await fetch(`${process.env.link}/api/verify`, {
+          const verifyResponse = await fetch(`${backlink}/api/verify`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -73,7 +75,7 @@ export const Payment = () => {
 
   const payment = async () => {
     try {
-      const response = await fetch(`${process.env.link}/api/orders`, {
+      const response = await fetch(`${backlink}/api/orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: total + pcharge + deliveryCharge }),
@@ -93,7 +95,7 @@ export const Payment = () => {
 
   const addorder = async () => {
     try {
-      const response = await fetch(`${process.env.link}/api/addorder`, {
+      const response = await fetch(`${backlink}/api/addorder`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -112,7 +114,7 @@ export const Payment = () => {
 
   const clearcart = async () => {
     try {
-      await fetch(`${process.env.link}/api/Cart`, {
+      await fetch(`${backlink}/api/Cart`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -125,7 +127,7 @@ export const Payment = () => {
   useEffect(() => {
     const fetchCarts = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/CurrentOrder`, {
+        const response = await fetch(`${backlink}/api/CurrentOrder`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -178,7 +180,7 @@ export const Payment = () => {
         return;
       }
 
-      const response = await fetch(`${process.env.link}/api/credit/codpayment`, {
+      const response = await fetch(`${backlink}/api/credit/codpayment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

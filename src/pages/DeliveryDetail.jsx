@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../pages-css/DeliveryDetail.css";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const DeliveryDetail = () => {
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ export const DeliveryDetail = () => {
     }
 
     try {
-      const res = await fetch(`${process.env.link}/api/${"deliverydetail"}/forgot-password`, {
+      const res = await fetch(`${backlink}/api/${"deliverydetail"}/forgot-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -62,7 +64,7 @@ export const DeliveryDetail = () => {
 
   const handleVerifyOtp = async () => {
     try {
-      const res = await fetch(`${process.env.link}/api/verify-otp`, {
+      const res = await fetch(`${backlink}/api/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),
@@ -83,7 +85,7 @@ export const DeliveryDetail = () => {
     if (timer > 0) return;
 
     try {
-      const res = await fetch(`${process.env.link}/api/resend-otp`, {
+      const res = await fetch(`${backlink}/api/resend-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -103,7 +105,7 @@ export const DeliveryDetail = () => {
   const updateOrderStatus = async (orderId, newStatus) => {
     try {
       const response = await fetch(
-        `${process.env.link}/api/${orderId}/Order`,
+        `${backlink}/api/${orderId}/Order`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -123,7 +125,7 @@ export const DeliveryDetail = () => {
     }
     if (paymentdetail[0].payment_method === "COD") {
       try {
-        const response = await fetch(`${process.env.link}/api/codpayment`, {
+        const response = await fetch(`${backlink}/api/codpayment`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ paymentid: paymentdetail[0]._id }),

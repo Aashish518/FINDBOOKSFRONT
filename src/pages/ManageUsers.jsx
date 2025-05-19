@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import "../pages-css/ManageUsers.css";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const ManageUsers = () => {
   const [search, setSearch] = useState("");
@@ -15,7 +17,7 @@ export const ManageUsers = () => {
   useEffect(() => {
     const GetUsers = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/AllUser`, {
+        const response = await fetch(`${backlink}/api/AllUser`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -45,7 +47,7 @@ export const ManageUsers = () => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
   
     try {
-      const response = await fetch(`${process.env.link}/api/User`, {
+      const response = await fetch(`${backlink}/api/User`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

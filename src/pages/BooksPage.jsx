@@ -4,7 +4,9 @@ import { useParams } from "react-router-dom";
 import "../components-css/Bookcard.css";
 import Load from "../components/Load";
 import { Bookcard } from "../components/Bookcard";
-import {FilterComponent} from "../components/Filter";
+import { FilterComponent } from "../components/Filter";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const BooksPage = () => {
   const { subcategory } = useParams();
@@ -17,8 +19,8 @@ export const BooksPage = () => {
     const fetchBooks = async () => {
       try {
         const [bookRes, sellOrderRes] = await Promise.all([
-          fetch(`${process.env.link}/api/${subcategory}/Books`),
-          fetch(`${process.env.link}/api/resellerbook`)
+          fetch(`${backlink}/api/${subcategory}/Books`),
+          fetch(`${backlink}/api/resellerbook`)
         ]);
   
         const [bookData, sellOrderData] = await Promise.all([

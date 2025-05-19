@@ -2,6 +2,8 @@ import { useState } from "react";
 import "../pages-css/AdminAddUser.css";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const AdminAddUser = () => {
   const [user, setUser] = useState({
@@ -60,7 +62,7 @@ export const AdminAddUser = () => {
     console.log("User Data Submitted:", user);
 
     try {
-      const response = await fetch(`${process.env.link}/api/User`, {
+      const response = await fetch(`${backlink}/api/User`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

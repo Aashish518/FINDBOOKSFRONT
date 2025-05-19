@@ -2,6 +2,8 @@ import { useState, useEffect} from "react";
 import "../pages-css/ManageBooks.css";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const ManageBooks = () => {
   const [search, setSearch] = useState("");
@@ -14,8 +16,8 @@ export const ManageBooks = () => {
   const fetchBook = async () => {
     try {
       const [bookRes, sellOrderRes] = await Promise.all([
-        fetch(`${process.env.link}/api/Book`),
-        fetch(`${process.env.link}/api/resellerbook`)
+        fetch(`${backlink}/api/Book`),
+        fetch(`${backlink}/api/resellerbook`)
       ]);
 
       const [bookData, sellOrderData] = await Promise.all([
@@ -59,7 +61,7 @@ export const ManageBooks = () => {
     if (!window.confirm("Are you sure you want to delete this book?")) return;
 
     try {
-      const response = await fetch(`${process.env.link}/api/Book`, {
+      const response = await fetch(`${backlink}/api/Book`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -136,7 +138,7 @@ export const ManageBooks = () => {
                     <td className="centered">{index + 1}</td>
                     <td>
                       <img
-                        src={`${process.env.link}/${product.BookImageURL}`}
+                        src={`${backlink}/${product.BookImageURL}`}
                         alt={product.BookName}
                         className="bookImage"
                       />

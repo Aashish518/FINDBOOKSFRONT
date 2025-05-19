@@ -3,6 +3,8 @@ import "../pages-css/Useraddress.css";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../Context/order";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 // Delivery charges array to validate pincodes
 export const deliveryChargesArray = [
@@ -161,7 +163,7 @@ export const Useraddress = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.link}/api/Order`, {
+      const response = await fetch(`${backlink}/api/Order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

@@ -6,6 +6,8 @@ import { ProfileMenu } from "../components/ProfileMenu";
 import { useState, useEffect } from "react";
 import { Plus, Mail, Phone, User, Calendar } from "lucide-react";
 import Load from "../components/Load";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const Profile = () => {
     const navigate = useNavigate();
@@ -20,7 +22,7 @@ export const Profile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await fetch(`${process.env.link}/api/profile`, {
+                const response = await fetch(`${backlink}/api/profile`, {
                     credentials: "include",
                 });
                 const json = await response.json();

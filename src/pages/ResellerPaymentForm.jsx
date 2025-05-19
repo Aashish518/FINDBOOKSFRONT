@@ -3,6 +3,8 @@ import "../pages-css/ResellerPaymentForm.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
 import { deliveryChargesArray } from "./Useraddress"; // Import the deliveryChargesArray
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const ResellerPaymentForm = () => {
     const [paymentMethod, setPaymentMethod] = useState("");
@@ -75,7 +77,7 @@ export const ResellerPaymentForm = () => {
         }
 
         try {
-            const response = await fetch(`${process.env.link}/api/${UserRole}/Book`, {
+            const response = await fetch(`${backlink}/api/${UserRole}/Book`, {
                 method: "POST",
                 body: formDataToSend,
                 credentials: "include",
@@ -85,7 +87,7 @@ export const ResellerPaymentForm = () => {
             const bookid = json.book?._id;
             if (bookid) {
                 try {
-                    const response = await fetch(`${process.env.link}/api/ResellerPaymentForm`, {
+                    const response = await fetch(`${backlink}/api/ResellerPaymentForm`, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ ...formData, bookid }),

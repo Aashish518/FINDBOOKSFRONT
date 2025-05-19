@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../pages-css/EditProfile.css"; // Import external CSS
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const EditProfile = () => {
   const location = useLocation();
@@ -32,7 +34,7 @@ export const EditProfile = () => {
     const [firstName, lastName] = formData.name.split(" "); // Split name into first and last
 
     try {
-      const response = await fetch(`${process.env.link}/api/User`, {
+      const response = await fetch(`${backlink}/api/User`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

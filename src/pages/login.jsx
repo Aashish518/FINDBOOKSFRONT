@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import Cookies from 'js-cookie';
 import "../pages-css/Login.css";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const Login = () => {
 
@@ -49,7 +51,7 @@ export const Login = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.link}/api/registerotp`, {
+      const response = await fetch(`${backlink}/api/registerotp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: Regcredentials.email }),
@@ -78,7 +80,7 @@ export const Login = () => {
     }
 
     try {
-      const res = await fetch(`${process.env.link}/api/verifyotp`, {
+      const res = await fetch(`${backlink}/api/verifyotp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: Regcredentials.email, otp }),
@@ -174,7 +176,7 @@ export const Login = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.link}/api/User`, {
+      const response = await fetch(`${backlink}/api/User`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Regcredentials),
@@ -208,7 +210,7 @@ export const Login = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.link}/api/login`, {
+      const response = await fetch(`${backlink}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Logcredentials),

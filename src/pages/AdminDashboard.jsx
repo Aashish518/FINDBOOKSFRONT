@@ -17,6 +17,8 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { autoTable } from 'jspdf-autotable';
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 
 const AdminRoute = ({ children }) => {
@@ -60,7 +62,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const GetUser = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/User`, {
+        const response = await fetch(`${backlink}/api/User`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -76,7 +78,7 @@ const AdminDashboard = () => {
     GetUser();
     const getOrders = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/Order`, {
+        const response = await fetch(`${backlink}/api/Order`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -92,7 +94,7 @@ const AdminDashboard = () => {
 
     const GetUsers = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/AllUser`, {
+        const response = await fetch(`${backlink}/api/AllUser`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -108,8 +110,8 @@ const AdminDashboard = () => {
     const fetchBook = async () => {
       try {
         const [bookRes, sellOrderRes] = await Promise.all([
-          fetch(`${process.env.link}/api/Book`),
-          fetch(`${process.env.link}/api/resellerbook`)
+          fetch(`${backlink}/api/Book`),
+          fetch(`${backlink}/api/resellerbook`)
         ]);
 
         const [bookData, sellOrderData] = await Promise.all([
@@ -134,7 +136,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const getRevenue = async () => {
       try {
-        const res = await fetch(`${process.env.link}/api/verify`, {
+        const res = await fetch(`${backlink}/api/verify`, {
           credentials: "include",
         });
         const data = await res.json();
@@ -181,7 +183,7 @@ const AdminDashboard = () => {
   
       try {
         const response = await fetch(
-          `${process.env.link}/api/${orderId}/Order`,
+          `${backlink}/api/${orderId}/Order`,
           {
             method: "PUT",
             headers: {
@@ -234,7 +236,7 @@ const AdminDashboard = () => {
   const generateReport = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${process.env.link}/api/report/generate`, {
+      const response = await fetch(`${backlink}/api/report/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

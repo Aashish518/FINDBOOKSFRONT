@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import "../pages-css/AddCat.css";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const AddCat = () => {
   const [categories, setCategories] = useState([]);
@@ -15,7 +17,7 @@ export const AddCat = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch(`${process.env.link}/api/Category`);
+      const response = await fetch(`${backlink}/api/Category`);
       const data = await response.json();
       setCategories(data);
     } catch (error) {
@@ -26,7 +28,7 @@ export const AddCat = () => {
   const handleAddCategory = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${process.env.link}/api/Category`, {
+      const response = await fetch(`${backlink}/api/Category`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ Category_Name: categoryName })
@@ -50,7 +52,7 @@ export const AddCat = () => {
       return;
     }
     try {
-      const response = await fetch(`${process.env.link}/api/Subcategory`, {
+      const response = await fetch(`${backlink}/api/Subcategory`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ Subcategory_Name: subcategoryName ,Category_id : selectedCategory })

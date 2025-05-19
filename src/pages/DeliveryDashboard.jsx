@@ -6,6 +6,8 @@ import { useAuth } from "../Context/AdminContext";
 import Load from "../components/Load";
 import { Navigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 const DeliverypersonRoute = ({ children }) => {
     const { user, loading } = useAuth();
@@ -54,7 +56,7 @@ const DeliveryDashboard = () => {
   useEffect(() => {
     const getOrders = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/Orders`, {
+        const response = await fetch(`${backlink}/api/Orders`, {
           credentials: "include",
         });
         const json = await response.json();
@@ -70,7 +72,7 @@ const DeliveryDashboard = () => {
 
     const getSellOrder = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/SellOrder`, {
+        const response = await fetch(`${backlink}/api/SellOrder`, {
           credentials: "include",
         });
         const json = await response.json();

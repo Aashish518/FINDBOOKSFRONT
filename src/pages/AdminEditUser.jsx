@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../pages-css/AdminAddUser.css";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const AdminEditUser = () => {
   const navigate = useNavigate();
@@ -51,7 +53,7 @@ export const AdminEditUser = () => {
     }
   
     try {
-      const response = await fetch(`${process.env.link}/api/User`, {
+      const response = await fetch(`${backlink}/api/User`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

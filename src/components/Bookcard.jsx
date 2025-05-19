@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import "../components-css/Bookcard.css";
 import Cookies from "js-cookie";
+import { Linkurl } from "./Linkurl";
+const backlink = Linkurl();
 
 export const Bookcard = ({ book }) => {
     const navigate = useNavigate();
@@ -17,7 +19,7 @@ export const Bookcard = ({ book }) => {
         }
         else{
             try {
-                const response = await fetch(`${process.env.link}/api/Cart`, {
+                const response = await fetch(`${backlink}/api/Cart`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ book_id: book._id, cart_quantity: 1 }),
@@ -42,7 +44,7 @@ export const Bookcard = ({ book }) => {
                     <div className="book-card-contant">
                         {book.Isoldbook ? <div className="old-lable">Resell</div> : <div className="lable">New</div>}
                         <div className="book-img">
-                            <img src={`${process.env.link}/${book.BookImageURL}`} alt={book.BookName} />
+                            <img src={`${backlink}/${book.BookImageURL}`} alt={book.BookName} />
                         </div>
                         <div className="book-detail">
                             <h2 className="book-name">

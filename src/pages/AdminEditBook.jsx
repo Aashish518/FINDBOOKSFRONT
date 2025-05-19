@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../components-css/BookForm.css";
 import { useAlert } from "../Context/AlertContext";
+import { Linkurl } from "../components/Linkurl";
+const backlink = Linkurl();
 
 export const AdminEditBook = () => {
   const navigate = useNavigate();
@@ -49,7 +51,7 @@ export const AdminEditBook = () => {
         headers["Content-Type"] = "application/json";
       }
   
-      const response = await fetch(`${process.env.link}/api/Book`, {
+      const response = await fetch(`${backlink}/api/Book`, {
         method: "PUT",
         headers,
         body,
@@ -94,7 +96,7 @@ export const AdminEditBook = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`${process.env.link}/api/Category`);
+        const response = await fetch(`${backlink}/api/Category`);
         const data = await response.json();
         setCategories(data);
       } catch (error) {
@@ -109,7 +111,7 @@ export const AdminEditBook = () => {
       const fetchSubcategories = async () => {
         try {
           const response = await fetch(
-            `${process.env.link}/api/${formData.Category}/Subcategory`
+            `${backlink}/api/${formData.Category}/Subcategory`
           );
           const data = await response.json();
           setSubcategories(Array.isArray(data) ? data : []);
@@ -164,7 +166,7 @@ export const AdminEditBook = () => {
       />
       {product?.image && !formData.image && (
         <img
-          src={`${process.env.link}/${product.image}`}
+          src={`${backlink}/${product.image}`}
           alt="Current Preview"
           style={{ maxWidth: "200px", maxHeight: "200px" }}
         />
