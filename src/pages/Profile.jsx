@@ -21,8 +21,13 @@ export const Profile = () => {
     // 🟢 Fetch User Profile Data
     useEffect(() => {
         const fetchProfile = async () => {
+            const token = Cookies.get("token");
             try {
                 const response = await fetch(`${backlink}/api/profile`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                     },
                     credentials: "include",
                 });
                 const json = await response.json();
