@@ -8,6 +8,8 @@ import { Plus, Mail, Phone, User, Calendar } from "lucide-react";
 import Load from "../components/Load";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+const token = Cookies.get("token");
+
 
 export const Profile = () => {
     const navigate = useNavigate();
@@ -21,7 +23,6 @@ export const Profile = () => {
     // 🟢 Fetch User Profile Data
     useEffect(() => {
         const fetchProfile = async () => {
-            const token = Cookies.get("token");
             try {
                 const response = await fetch(`${backlink}/api/profile`, {
                     headers: {

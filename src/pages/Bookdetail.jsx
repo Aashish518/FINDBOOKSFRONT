@@ -8,6 +8,8 @@ import { ShieldCheck, Star, CreditCard, Truck, Leaf } from "lucide-react";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+const token = Cookies.get("token");
+
 
 export const Bookdetail = () => {
   const location = useLocation();
@@ -59,7 +61,6 @@ export const Bookdetail = () => {
   };
 
   const addRatings = async (currentRating) => {
-    const token = Cookies.get("token");
     if (!token) {
       Navigate("/login");
       showAlert("Please Login/Register First", "error");
@@ -93,15 +94,16 @@ export const Bookdetail = () => {
   const addtocart = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-    const token = Cookies.get("token");
     if (!token) {
       Navigate("/login");
     } else {
       try {
         const response = await fetch(`${backlink}/api/Cart`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ book_id: book._id, cart_quantity: 1 }),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },          body: JSON.stringify({ book_id: book._id, cart_quantity: 1 }),
           credentials: "include",
         });
 
@@ -118,15 +120,16 @@ export const Bookdetail = () => {
   const buynow = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-    const token = Cookies.get("token");
     if (!token) {
       Navigate("/login");
     } else {
       try {
         const response = await fetch(`${backlink}/api/Cart`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ book_id: book._id, cart_quantity: 1 }),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },          body: JSON.stringify({ book_id: book._id, cart_quantity: 1 }),
           credentials: "include",
         });
 
