@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const Cart = () => {
     const [carts, setCarts] = useState([]);
@@ -22,7 +24,10 @@ export const Cart = () => {
         try {
             const response = await fetch(`${backlink}/api/Cart`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
                 body: JSON.stringify({ book_id: bookid }),
                 credentials: 'include',
             });
@@ -56,6 +61,10 @@ export const Cart = () => {
             try {
                 const response = await fetch(`${backlink}/api/Cart`, {
                     credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
                 });
                 const json = await response.json();
                 setCarts(json.cart);
@@ -82,8 +91,10 @@ export const Cart = () => {
         try {
             const response = await fetch(`${backlink}/api/updatequantity`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ book_id: bookid, action }),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }, body: JSON.stringify({ book_id: bookid, action }),
                 credentials: 'include',
             });
 
@@ -111,8 +122,10 @@ export const Cart = () => {
         try {
             const response = await fetch(`${backlink}/api/Cart`, {
                 method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }, credentials: 'include',
             });
 
             const json = await response.json();

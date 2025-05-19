@@ -4,6 +4,8 @@ import "../pages-css/ForgotPassword.css";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -50,8 +52,10 @@ function ForgotPassword() {
 
     await fetch(`${backlink}/api/${"forgotpassword"}/forgot-password`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }, body: JSON.stringify({ email }),
     });
 
     setStep(2);
@@ -70,8 +74,10 @@ function ForgotPassword() {
 
     const res = await fetch(`${backlink}/api/verify-otp`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, otp }),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }, body: JSON.stringify({ email, otp }),
     });
 
     if (res.ok) setStep(3);
@@ -93,8 +99,10 @@ function ForgotPassword() {
 
     const response = await fetch(`${backlink}/api/reset-password`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, newPassword }),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }, body: JSON.stringify({ email, newPassword }),
     });
 
     const data = await response.json();

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../pages-css/ManageReseller.css";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 const ManageResellers = () => {
     const [resellers, setResellers] = useState([]);
@@ -14,7 +16,12 @@ const ManageResellers = () => {
 
     const fetchResellers = async () => {
         try {
-            const response = await fetch(`${backlink}/api/resellerbook`);
+            const response = await fetch(`${backlink}/api/resellerbook`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                  },
+            });
             const data = await response.json();
             setResellers(data.resellers);
         } catch (error) {

@@ -7,6 +7,8 @@ import { useAlert } from "../Context/AlertContext";
 import { deliveryChargesArray } from "./Useraddress";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const Payment = () => {
   const [OrderData, setOrderData] = useState();
@@ -35,8 +37,10 @@ export const Payment = () => {
         try {
           const verifyResponse = await fetch(`${backlink}/api/verify`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },            body: JSON.stringify({
               razorpay_orderID: response.razorpay_order_id,
               razorpay_paymentID: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
@@ -77,8 +81,10 @@ export const Payment = () => {
     try {
       const response = await fetch(`${backlink}/api/orders`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: total + pcharge + deliveryCharge }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },        body: JSON.stringify({ amount: total + pcharge + deliveryCharge }),
         credentials: "include",
       });
 
@@ -97,8 +103,10 @@ export const Payment = () => {
     try {
       const response = await fetch(`${backlink}/api/addorder`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },        body: JSON.stringify({
           cartid: cartDatas,
           TotalAmount: total + pcharge + deliveryCharge,
         }),
@@ -116,8 +124,10 @@ export const Payment = () => {
     try {
       await fetch(`${backlink}/api/Cart`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },        credentials: "include",
       });
     } catch (error) {
       showAlert("An error occurred while removing the item", "error");
@@ -129,6 +139,10 @@ export const Payment = () => {
       try {
         const response = await fetch(`${backlink}/api/CurrentOrder`, {
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
         });
         const json = await response.json();
         setOrderData(json.order);
@@ -182,8 +196,10 @@ export const Payment = () => {
 
       const response = await fetch(`${backlink}/api/credit/codpayment`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },        body: JSON.stringify({
           order_id: OrderData._id,
           payment_method: paymentMethod,
           payment_status: "Pending",

@@ -7,6 +7,9 @@ import { ImBooks } from "react-icons/im";
 import { MdOutlineSell } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { FaUserCircle } from 'react-icons/fa';
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
+
 import { Linkurl } from "./Linkurl";
 const backlink = Linkurl();
 
@@ -21,6 +24,10 @@ export function ProfileMenu() {
             try {
                 const response = await fetch(`${backlink}/api/User`, {
                     credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
                 });
 
                 const json = await response.json();

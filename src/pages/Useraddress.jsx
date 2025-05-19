@@ -5,6 +5,8 @@ import { useCart } from "../Context/order";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 // Delivery charges array to validate pincodes
 export const deliveryChargesArray = [
@@ -166,7 +168,8 @@ export const Useraddress = () => {
       const response = await fetch(`${backlink}/api/Order`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
           ...formData,

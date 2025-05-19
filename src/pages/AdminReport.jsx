@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../pages-css/AdminReport.css";
-import {exportToCSV} from "../utils/exportToCSV"
+import { exportToCSV } from "../utils/exportToCSV"
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const AdminReport = () => {
   const [filters, setFilters] = useState({

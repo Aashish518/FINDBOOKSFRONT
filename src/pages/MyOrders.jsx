@@ -7,6 +7,8 @@ import Load from "../components/Load";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const MyOrders = () => {
   const [order, setOrder] = useState([]);
@@ -21,6 +23,10 @@ export const MyOrders = () => {
       try {
         const response = await fetch(`${backlink}/api/Order`, {
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
         });
 
         const json = await response.json();
@@ -46,8 +52,10 @@ export const MyOrders = () => {
       try {
         const response = await fetch(`${backlink}/api/${newStatus}/SellOrders`, {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ resellerid: resellerid, bookid: booksdetail._id }),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },          body: JSON.stringify({ resellerid: resellerid, bookid: booksdetail._id }),
           credentials: 'include',
         });
 
@@ -68,6 +76,7 @@ export const MyOrders = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
           },
           credentials: "include",
           body: JSON.stringify({ status: newStatus }),

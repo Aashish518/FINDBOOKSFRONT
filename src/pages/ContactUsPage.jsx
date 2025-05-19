@@ -1,6 +1,8 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import '../pages-css/ContactUsPage.css'; // Import the CSS file
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 const ContactUsPage = () => {
     return (

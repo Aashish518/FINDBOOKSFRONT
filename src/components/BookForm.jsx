@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "../components-css/BookForm.css";
 import { Linkurl } from "./Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
+
 
 export const BookForm = ({ UserRole }) => {
   const navigate = useNavigate();
@@ -29,7 +32,12 @@ export const BookForm = ({ UserRole }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`${backlink}/api/Category`);
+        const response = await fetch(`${backlink}/api/Category`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+        });
         const data = await response.json();
         setCategories(data);
       } catch (error) {
@@ -46,7 +54,12 @@ export const BookForm = ({ UserRole }) => {
     setErrors((prevErrors) => ({ ...prevErrors, Category: "" })); // Clear errors
 
     try {
-      const response = await fetch(`${backlink}/api/${categoryId}/Subcategory`);
+      const response = await fetch(`${backlink}/api/${categoryId}/Subcategory`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+      });
       const data = await response.json();
       setSubcategories(Array.isArray(data) ? data : []);
     } catch (error) {

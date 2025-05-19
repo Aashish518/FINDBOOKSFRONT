@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const ManageUsers = () => {
   const [search, setSearch] = useState("");
@@ -19,6 +21,10 @@ export const ManageUsers = () => {
       try {
         const response = await fetch(`${backlink}/api/AllUser`, {
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
         });
         const json = await response.json();
         setUsers(json.users);
@@ -51,6 +57,7 @@ export const ManageUsers = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         credentials: "include",
         body: JSON.stringify({ userId: id }),

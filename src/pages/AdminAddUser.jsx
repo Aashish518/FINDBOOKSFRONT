@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
+
 
 export const AdminAddUser = () => {
   const [user, setUser] = useState({
@@ -66,6 +69,7 @@ export const AdminAddUser = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify(user),
       });

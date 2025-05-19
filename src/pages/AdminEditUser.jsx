@@ -4,6 +4,8 @@ import "../pages-css/AdminAddUser.css";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const AdminEditUser = () => {
   const navigate = useNavigate();
@@ -55,8 +57,10 @@ export const AdminEditUser = () => {
     try {
       const response = await fetch(`${backlink}/api/User`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },        credentials: "include",
         body: JSON.stringify({
           userId: user.id, 
           firstname: user.firstName,

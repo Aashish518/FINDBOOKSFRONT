@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "../pages-css/Category.css";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const Category = () => {
     const [categories, setCategories] = useState([]);
@@ -11,7 +13,12 @@ export const Category = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch(`${backlink}/api/Category`);
+                const response = await fetch(`${backlink}/api/Category`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                });
                 const data = await response.json();
                 setCategories(data);
                 fetchAllSubcategories(data);
@@ -27,7 +34,12 @@ export const Category = () => {
         await Promise.all(
             categories.map(async (category) => {
                 try {
-                    const response = await fetch(`${backlink}/api/${category._id}/Subcategory`);
+                    const response = await fetch(`${backlink}/api/${category._id}/Subcategory`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                         },
+                    });
                     const data = await response.json();
                     subcategoryData[category._id] = data;
                 } catch (error) {

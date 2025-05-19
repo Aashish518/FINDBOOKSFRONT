@@ -19,6 +19,8 @@ import { autoTable } from 'jspdf-autotable';
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 
 const AdminRoute = ({ children }) => {
@@ -64,6 +66,10 @@ const AdminDashboard = () => {
       try {
         const response = await fetch(`${backlink}/api/User`, {
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
         });
         const json = await response.json();
         getUser(json.user);
@@ -80,6 +86,10 @@ const AdminDashboard = () => {
       try {
         const response = await fetch(`${backlink}/api/Order`, {
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
         });
         const json = await response.json();
         console.log("Fetched Orders:", json.orders);
@@ -96,6 +106,10 @@ const AdminDashboard = () => {
       try {
         const response = await fetch(`${backlink}/api/AllUser`, {
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
         });
         const json = await response.json();
         setUsers(json.users);
@@ -110,8 +124,18 @@ const AdminDashboard = () => {
     const fetchBook = async () => {
       try {
         const [bookRes, sellOrderRes] = await Promise.all([
-          fetch(`${backlink}/api/Book`),
-          fetch(`${backlink}/api/resellerbook`)
+          fetch(`${backlink}/api/Book`, {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+          }),
+          fetch(`${backlink}/api/resellerbook`, {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+          })
         ]);
 
         const [bookData, sellOrderData] = await Promise.all([
@@ -138,6 +162,10 @@ const AdminDashboard = () => {
       try {
         const res = await fetch(`${backlink}/api/verify`, {
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
         });
         const data = await res.json();
   
@@ -188,6 +216,7 @@ const AdminDashboard = () => {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
             },
             credentials: "include",
             body: JSON.stringify({ status: newStatus }),
@@ -239,7 +268,8 @@ const AdminDashboard = () => {
       const response = await fetch(`${backlink}/api/report/generate`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         credentials: 'include',
         body: JSON.stringify({

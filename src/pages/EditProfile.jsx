@@ -4,6 +4,8 @@ import "../pages-css/EditProfile.css"; // Import external CSS
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const EditProfile = () => {
   const location = useLocation();
@@ -36,8 +38,10 @@ export const EditProfile = () => {
     try {
       const response = await fetch(`${backlink}/api/User`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },        credentials: "include",
         body: JSON.stringify({
           userId: userData._id, // Use correct ID from userData
           firstname: firstName || "", // Ensure non-empty values

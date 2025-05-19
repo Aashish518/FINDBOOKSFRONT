@@ -7,6 +7,8 @@ import '../pages-css/Admin.css';
 import { useAlert } from '../Context/AlertContext';
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 const Admin = () => {
     const [report, setReport] = useState(null);

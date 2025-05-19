@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../pages-css/PaymentForm.css";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const PaymentForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("online");

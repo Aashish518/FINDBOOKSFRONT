@@ -5,8 +5,10 @@ import Load from "./Load";
 import "../components-css/Bookcard.css";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { HomeFeatures } from "./HomeFeature";
+import Cookies from 'js-cookie';
 import { Linkurl } from "./Linkurl";
 const backlink = Linkurl();
+const token = Cookies.get("token");
 
 export const Book = () => {
   const [bookdata, setBookdata] = useState([]);
@@ -61,8 +63,18 @@ export const Book = () => {
   const fetchBook = async () => {
     try {
       const [bookRes, sellOrderRes] = await Promise.all([
-        fetch(`${backlink}/api/Book`),
-        fetch(`${backlink}/api/resellerbook`)
+        fetch(`${backlink}/api/Book`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+        }),
+        fetch(`${backlink}/api/resellerbook`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+        })
       ]);
 
       const [bookData, sellOrderData] = await Promise.all([
@@ -141,6 +153,10 @@ export const Book = () => {
       if (reseller) {
         try {
           await fetch(`${backlink}/api/resellerbook/${reseller._id}`, {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
             method: 'DELETE',
           });
           console.log(`Deleted reseller book: ${book.BookName}`);

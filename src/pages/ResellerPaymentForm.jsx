@@ -5,6 +5,9 @@ import { useAlert } from "../Context/AlertContext";
 import { deliveryChargesArray } from "./Useraddress"; // Import the deliveryChargesArray
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
+
 
 export const ResellerPaymentForm = () => {
     const [paymentMethod, setPaymentMethod] = useState("");
@@ -79,6 +82,10 @@ export const ResellerPaymentForm = () => {
         try {
             const response = await fetch(`${backlink}/api/${UserRole}/Book`, {
                 method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                  },
                 body: formDataToSend,
                 credentials: "include",
             });
@@ -89,8 +96,10 @@ export const ResellerPaymentForm = () => {
                 try {
                     const response = await fetch(`${backlink}/api/ResellerPaymentForm`, {
                         method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ ...formData, bookid }),
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                          },                        body: JSON.stringify({ ...formData, bookid }),
                         credentials: "include",
                     });
                     const json = await response.json();

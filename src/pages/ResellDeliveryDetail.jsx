@@ -4,6 +4,8 @@ import "../pages-css/ResellDeliveryDetail.css";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const ResellDeliveryDetail = () => {
     const navigate = useNavigate();
@@ -45,8 +47,10 @@ export const ResellDeliveryDetail = () => {
         try {
             const res = await fetch(`${backlink}/api/${"reselldelivery"}/forgot-password`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email }),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                  },                body: JSON.stringify({ email }),
             });
 
             if (res.ok) {
@@ -65,8 +69,10 @@ export const ResellDeliveryDetail = () => {
         try {
             const res = await fetch(`${backlink}/api/verify-otp`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, otp }),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                  },                body: JSON.stringify({ email, otp }),
             });
 
             if (res.ok) {
@@ -86,8 +92,10 @@ export const ResellDeliveryDetail = () => {
         try {
             const res = await fetch(`${backlink}/api/resend-otp`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email }),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                  },                body: JSON.stringify({ email }),
             });
 
             if (res.ok) {
@@ -105,8 +113,10 @@ export const ResellDeliveryDetail = () => {
             try {
                 const response = await fetch(`${backlink}/api/${newStatus}/SellOrders`, {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ resellerid: resellerid, bookid: booksdetail._id }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                      },                    body: JSON.stringify({ resellerid: resellerid, bookid: booksdetail._id }),
                     credentials: 'include',
                 });
 
@@ -128,7 +138,8 @@ export const ResellDeliveryDetail = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                },
+                    "Authorization": `Bearer ${token}`
+                  },
                 body: JSON.stringify({
                     order_id: resellerdata._id,
                     payment_method: "COD",

@@ -4,6 +4,8 @@ import "../components-css/BookForm.css";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const AdminEditBook = () => {
   const navigate = useNavigate();
@@ -53,7 +55,10 @@ export const AdminEditBook = () => {
   
       const response = await fetch(`${backlink}/api/Book`, {
         method: "PUT",
-        headers,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
         body,
         credentials: "include",
       });
@@ -96,7 +101,12 @@ export const AdminEditBook = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`${backlink}/api/Category`);
+        const response = await fetch(`${backlink}/api/Category`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+        });
         const data = await response.json();
         setCategories(data);
       } catch (error) {
@@ -111,7 +121,12 @@ export const AdminEditBook = () => {
       const fetchSubcategories = async () => {
         try {
           const response = await fetch(
-            `${backlink}/api/${formData.Category}/Subcategory`
+            `${backlink}/api/${formData.Category}/Subcategory`, {
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+              },
+          }
           );
           const data = await response.json();
           setSubcategories(Array.isArray(data) ? data : []);

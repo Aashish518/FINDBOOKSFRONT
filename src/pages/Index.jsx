@@ -3,6 +3,8 @@ import { Book } from "../components/Book";
 import { Navbar } from "../components/Navbar";
 import AboutUs from "./AboutUs";
 import "../pages-css/Index.css";
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const Index = () => {
   const bookRef = useRef(null);

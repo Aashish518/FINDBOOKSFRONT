@@ -5,6 +5,8 @@ import { useViewOrder } from "../Context/OrderDetail";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const AdminOrders = () => {
   const [bookdata, setBookdata] = useState([]);
@@ -25,6 +27,10 @@ export const AdminOrders = () => {
       try {
         const response = await fetch(`${backlink}/api/Orders`, {
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
         });
         const json = await response.json();
         setOrders(json.orders);
@@ -40,6 +46,10 @@ export const AdminOrders = () => {
       try {
         const response = await fetch(`${backlink}/api/AllUser`, {
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
         });
         const json = await response.json();
         setUsers(json.users); // Initialize with all users
@@ -52,7 +62,12 @@ export const AdminOrders = () => {
 
     const fetchBook = async () => {
       try {
-        const res = await fetch(`${backlink}/api/Book`);
+        const res = await fetch(`${backlink}/api/Book`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+        });
         const data = await res.json();
         setBookdata(data);
       } catch (error) {

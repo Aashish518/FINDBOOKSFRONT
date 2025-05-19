@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import "../components-css/BookForm.css";
+import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "./Linkurl";
 const backlink = Linkurl();
+const token = Cookies.get("token");
 
 export const AdminBookForm = ({ UserRole }) => {
   const navigate = useNavigate();
@@ -54,6 +56,10 @@ export const AdminBookForm = ({ UserRole }) => {
         }
   
         const response = await fetch(`${backlink}/api/${UserRole}/Book`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
           method: "POST",
           body: formDataToSend,
           credentials: "include"
@@ -84,7 +90,12 @@ export const AdminBookForm = ({ UserRole }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`${backlink}/api/Category`);
+        const response = await fetch(`${backlink}/api/Category`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+        });
         const data = await response.json();
         setCategories(data);
       } catch (error) {
@@ -101,7 +112,12 @@ export const AdminBookForm = ({ UserRole }) => {
     setErrors((prevErrors) => ({ ...prevErrors, Category: "" })); // Clear error when user selects category
 
     try {
-      const response = await fetch(`${backlink}/api/${categoryId}/Subcategory`);
+      const response = await fetch(`${backlink}/api/${categoryId}/Subcategory`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+      });
       const data = await response.json();
       setSubcategories(Array.isArray(data) ? data : []);
     } catch (error) {

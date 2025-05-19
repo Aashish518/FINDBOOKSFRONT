@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const ManageBooks = () => {
   const [search, setSearch] = useState("");
@@ -16,8 +18,18 @@ export const ManageBooks = () => {
   const fetchBook = async () => {
     try {
       const [bookRes, sellOrderRes] = await Promise.all([
-        fetch(`${backlink}/api/Book`),
-        fetch(`${backlink}/api/resellerbook`)
+        fetch(`${backlink}/api/Book`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+}),
+        fetch(`${backlink}/api/resellerbook`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+})
       ]);
 
       const [bookData, sellOrderData] = await Promise.all([
@@ -65,6 +77,7 @@ export const ManageBooks = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({ bookId: id }),
         credentials: "include",

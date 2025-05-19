@@ -8,6 +8,8 @@ import { Navigate } from "react-router-dom";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 const DeliverypersonRoute = ({ children }) => {
     const { user, loading } = useAuth();
@@ -58,6 +60,10 @@ const DeliveryDashboard = () => {
       try {
         const response = await fetch(`${backlink}/api/Orders`, {
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
         });
         const json = await response.json();
         setOrders(json.orders || []);
@@ -74,6 +80,10 @@ const DeliveryDashboard = () => {
       try {
         const response = await fetch(`${backlink}/api/SellOrder`, {
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
         });
         const json = await response.json();
         setBooks(Array.isArray(json.books) ? json.books : []);

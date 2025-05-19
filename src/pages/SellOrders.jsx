@@ -7,6 +7,8 @@ import Load from "../components/Load";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const SellOrders = () => {
   const [books, setBooks] = useState([]);
@@ -21,6 +23,10 @@ export const SellOrders = () => {
       try {
         const response = await fetch(`${backlink}/api/SellOrders`, {
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
         });
         const json = await response.json();
         const books = Array.isArray(json.books) ? json.books : [];
@@ -42,8 +48,10 @@ export const SellOrders = () => {
     try {
       const response = await fetch(`${backlink}/api/Book`, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ bookId: bookid }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },        body: JSON.stringify({ bookId: bookid }),
         credentials: 'include',
       });
 
@@ -62,8 +70,10 @@ setTimeout(async ()=> {
     try{
       const response = await fetch(`${backlink}/api/ResellerPaymentForm/${resellerid}`, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resellerid: resellerid }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },        body: JSON.stringify({ resellerid: resellerid }),
         credentials: 'include',
       });
 

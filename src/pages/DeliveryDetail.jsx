@@ -4,6 +4,8 @@ import "../pages-css/DeliveryDetail.css";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const DeliveryDetail = () => {
   const navigate = useNavigate();
@@ -46,8 +48,10 @@ export const DeliveryDetail = () => {
     try {
       const res = await fetch(`${backlink}/api/${"deliverydetail"}/forgot-password`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }, body: JSON.stringify({ email }),
       });
 
       if (res.ok) {
@@ -66,8 +70,10 @@ export const DeliveryDetail = () => {
     try {
       const res = await fetch(`${backlink}/api/verify-otp`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, otp }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }, body: JSON.stringify({ email, otp }),
       });
 
       if (res.ok) {
@@ -87,8 +93,10 @@ export const DeliveryDetail = () => {
     try {
       const res = await fetch(`${backlink}/api/resend-otp`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }, body: JSON.stringify({ email }),
       });
 
       if (res.ok) {
@@ -108,8 +116,10 @@ export const DeliveryDetail = () => {
         `${backlink}/api/${orderId}/Order`,
         {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },          credentials: "include",
           body: JSON.stringify({ status: newStatus, userdetail: userdetail }),
         }
       );
@@ -127,7 +137,10 @@ export const DeliveryDetail = () => {
       try {
         const response = await fetch(`${backlink}/api/codpayment`, {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
           body: JSON.stringify({ paymentid: paymentdetail[0]._id }),
           credentials: "include",
         });

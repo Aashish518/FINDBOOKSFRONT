@@ -7,6 +7,8 @@ import { useAlert } from "../Context/AlertContext";
 import Load from "../components/Load"
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 const Reports = () => {
   const { user, loading } = useAuth();
@@ -20,6 +22,10 @@ const Reports = () => {
       try {
         const response = await fetch(`${backlink}/api/report`, {
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
         });
         const data = await response.json();
         if (data.success) {
@@ -39,6 +45,10 @@ const Reports = () => {
     try {
       const response = await fetch(`${backlink}/api/report/${reportId}/download`, {
         credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
       });
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);

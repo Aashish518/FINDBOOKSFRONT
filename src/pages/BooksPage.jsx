@@ -7,6 +7,8 @@ import { Bookcard } from "../components/Bookcard";
 import { FilterComponent } from "../components/Filter";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const BooksPage = () => {
   const { subcategory } = useParams();
@@ -19,8 +21,18 @@ export const BooksPage = () => {
     const fetchBooks = async () => {
       try {
         const [bookRes, sellOrderRes] = await Promise.all([
-          fetch(`${backlink}/api/${subcategory}/Books`),
-          fetch(`${backlink}/api/resellerbook`)
+          fetch(`${backlink}/api/${subcategory}/Books`, {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+          }),
+          fetch(`${backlink}/api/resellerbook`, {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+          })
         ]);
   
         const [bookData, sellOrderData] = await Promise.all([

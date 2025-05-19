@@ -3,6 +3,9 @@ import "../pages-css/AddCat.css";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
+
 
 export const AddCat = () => {
   const [categories, setCategories] = useState([]);
@@ -17,7 +20,12 @@ export const AddCat = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch(`${backlink}/api/Category`);
+      const response = await fetch(`${backlink}/api/Category`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+      });
       const data = await response.json();
       setCategories(data);
     } catch (error) {
@@ -30,7 +38,10 @@ export const AddCat = () => {
     try {
       const response = await fetch(`${backlink}/api/Category`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
         body: JSON.stringify({ Category_Name: categoryName })
       });
       if (response.ok) {
@@ -54,8 +65,11 @@ export const AddCat = () => {
     try {
       const response = await fetch(`${backlink}/api/Subcategory`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ Subcategory_Name: subcategoryName ,Category_id : selectedCategory })
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ Subcategory_Name: subcategoryName, Category_id: selectedCategory })
       });
       if (response.ok) {
         showAlert("Subcategory added successfully!","success");

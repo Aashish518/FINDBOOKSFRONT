@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import "../pages-css/AdminViewOrder.css";
 import { useViewOrder } from "../Context/OrderDetail";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const AdminViewOrder = () => {
   const { orderDetails } = useViewOrder();

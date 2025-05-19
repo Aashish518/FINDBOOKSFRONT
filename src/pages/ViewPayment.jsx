@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../pages-css/ViewPayment.css";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+import Cookies from 'js-cookie';
+const token = Cookies.get("token");
 
 export const ViewPayment = () => {
     const [payments, setPayments] = useState([]);
@@ -12,6 +14,10 @@ export const ViewPayment = () => {
             try {
                 const response = await fetch(`${backlink}/api/verify`, {
                     credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                      },
                 });
                 const json = await response.json();
                 setPayments(Array.isArray(json.payments) ? json.payments : []);
