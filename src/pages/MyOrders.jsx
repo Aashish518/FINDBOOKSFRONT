@@ -1,4 +1,4 @@
-zimport React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import "../pages-css/MyOrders.css";
 import { ProfileMenu } from "../components/ProfileMenu";
