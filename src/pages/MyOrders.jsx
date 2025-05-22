@@ -163,18 +163,18 @@ export const MyOrders = () => {
                       </div>
                     </div>
                     <div className="order-books">
-                      <h3>Ordered Books : {orderItem.books.length}</h3>
+<h3>Ordered Books : {(orderItem.books || []).length}</h3>
                       <div className="book-list">
-                        {book
-                          .filter(
-                            (bookItem, index, self) =>
-                              orderItem.books.some(
-                                (orderBook) => orderBook.book_id === bookItem._id
-                              ) &&
-                              index ===
-                              self.findIndex((b) => b._id === bookItem._id)
-                          )
-                          .map((bookItem) => {
+{book
+  .filter(
+    (bookItem, index, self) =>
+      (orderItem.books || []).some(
+        (orderBook) => orderBook.book_id === bookItem._id
+      ) &&
+      index ===
+      self.findIndex((b) => b._id === bookItem._id)
+  )
+  .map((bookItem) => {
                             const matchedBook = orderItem.books.find(
                               (orderBook) => orderBook.book_id === bookItem._id
                             );
