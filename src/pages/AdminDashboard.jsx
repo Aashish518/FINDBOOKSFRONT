@@ -32,11 +32,11 @@ const AdminRoute = ({ children }) => {
     );
   }
 
-  if (!user) {
-    window.location.reload();
-  } else {
-    return children;
-  };
+  // if (!user) {
+  //   window.location.reload();
+  // } else {
+  //   return children;
+  // };
 }
 const AdminDashboard = () => {
   const [user, getUser] = useState({});

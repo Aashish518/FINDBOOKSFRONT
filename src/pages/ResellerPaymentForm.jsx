@@ -99,7 +99,8 @@ export const ResellerPaymentForm = () => {
                         headers: {
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${token}`
-                          },                        body: JSON.stringify({ ...formData, bookid }),
+                        },
+                        body: JSON.stringify({ ...formData, bookid }),
                         credentials: "include",
                     });
                     const json = await response.json();
