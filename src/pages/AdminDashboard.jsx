@@ -32,11 +32,11 @@ const AdminRoute = ({ children }) => {
     );
   }
 
-  // if (!user) {
-  //   window.location.reload();
-  // } else {
-  //   return children;
-  // };
+  if (!user) {
+    window.location.reload();
+  } else {
+    return children;
+  };
 }
 const AdminDashboard = () => {
   const [user, getUser] = useState({});
@@ -597,7 +597,7 @@ const AdminDashboard = () => {
                     .filter((order) => {
                       return (
                         // order.Order_Status === "Shipped" ||
-                        order.Order_Status === "Pending"
+                        order.Order_Status === "Pending" || 0
                       );
                     })
                     .map((order) => {
