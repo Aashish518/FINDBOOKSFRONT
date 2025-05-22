@@ -5,6 +5,7 @@ import "../pages-css/Login.css";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
+const token = Cookies.get("token");
 
 export const Login = () => {
 
@@ -53,8 +54,10 @@ export const Login = () => {
     try {
       const response = await fetch(`${backlink}/api/registerotp`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: Regcredentials.email }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }, body: JSON.stringify({ email: Regcredentials.email }),
       });
 
       if (!response.ok) {
@@ -82,8 +85,10 @@ export const Login = () => {
     try {
       const res = await fetch(`${backlink}/api/verifyotp`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: Regcredentials.email, otp }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }, body: JSON.stringify({ email: Regcredentials.email, otp }),
       });
 
       const data = await res.json();

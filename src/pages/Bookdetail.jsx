@@ -52,7 +52,12 @@ export const Bookdetail = () => {
 
   const fetchAverageRating = async () => {
     try {
-      const response = await fetch(`${backlink}/api/Ratings/average/${book._id}`);
+      const response = await fetch(`${backlink}/api/Ratings/average/${book._id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+      });
       const data = await response.json();
       setAvgRating(parseFloat(data.averageRating) || 0);
     } catch (error) {
@@ -71,8 +76,10 @@ export const Bookdetail = () => {
     try {
       const response = await fetch(`${backlink}/api/Ratings`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ book_id: book._id, rate: currentRating }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }, body: JSON.stringify({ book_id: book._id, rate: currentRating }),
         credentials: "include",
       });
 

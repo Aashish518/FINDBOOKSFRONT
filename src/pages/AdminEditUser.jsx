@@ -60,7 +60,8 @@ export const AdminEditUser = () => {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`
-        },        credentials: "include",
+        },
+        credentials: "include",
         body: JSON.stringify({
           userId: user.id, 
           firstname: user.firstName,

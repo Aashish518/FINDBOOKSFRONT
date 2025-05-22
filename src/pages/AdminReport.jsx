@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../pages-css/AdminReport.css";
 import { exportToCSV } from "../utils/exportToCSV"
 import Cookies from 'js-cookie';
-const token = Cookies.get("token");
 
 export const AdminReport = () => {
   const [filters, setFilters] = useState({
@@ -14,7 +13,6 @@ export const AdminReport = () => {
 
   const [reportData, setReportData] = useState([]);
 
-  // Sample function to fetch report data (replace with API call)
   const generateReport = () => {
     const sampleData = [
       { id: 1, title: "Book A", category: "Fiction", condition: "New", sales: 120 },

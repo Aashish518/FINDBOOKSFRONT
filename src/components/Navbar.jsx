@@ -11,6 +11,7 @@ import { Category } from "../pages/Category";
 import { useNavigate } from "react-router-dom";
 import { Linkurl } from "./Linkurl";
 const backlink = Linkurl();
+const token = Cookies.get("token");
 
 export const Navbar = () => {
   const [menuActive, setMenuActive] = useState(false);
@@ -24,6 +25,10 @@ export const Navbar = () => {
     const GetUser = async () => {
       try {
         const response = await fetch(`${backlink}/api/User`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
           credentials: "include",
         });
 

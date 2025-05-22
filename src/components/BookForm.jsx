@@ -47,7 +47,6 @@ export const BookForm = ({ UserRole }) => {
     fetchCategories();
   }, []);
 
-  // Handle category change and fetch subcategories
   const handleCategoryChange = async (e) => {
     const categoryId = e.target.value;
     setFormData((prev) => ({ ...prev, Category: categoryId, SubCategory: "" }));

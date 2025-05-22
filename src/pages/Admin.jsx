@@ -22,7 +22,6 @@ const Admin = () => {
     const generateReport = async () => {
         try {
             setLoading(true);
-            const token = localStorage.getItem('token');
             const response = await fetch(`${backlink}/api/report/generate`, {
                 method: 'POST',
                 headers: {

@@ -3,6 +3,7 @@ import "../components-css/Bookcard.css";
 import Cookies from "js-cookie";
 import { Linkurl } from "./Linkurl";
 const backlink = Linkurl();
+const token = Cookies.get("token");
 
 export const Bookcard = ({ book }) => {
     const navigate = useNavigate();
@@ -21,7 +22,10 @@ export const Bookcard = ({ book }) => {
             try {
                 const response = await fetch(`${backlink}/api/Cart`, {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
                     body: JSON.stringify({ book_id: book._id, cart_quantity: 1 }),
                     credentials: "include",
                 });
