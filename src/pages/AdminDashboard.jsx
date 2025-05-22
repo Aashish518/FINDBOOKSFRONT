@@ -254,8 +254,7 @@ const AdminDashboard = () => {
         return bookInfo
           ? { ...bookInfo, book_quantity: bdata.book_quantity }
           : null;
-      })
-      .filter((book) => book !== null);
+      }).filter((book) => book !== null);
 
     setOrderDetails({ orderdata, userdata, bookdata: filteredBooks });
     navigate("/Admin/ViewOrder");
@@ -592,9 +591,7 @@ const AdminDashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.slice()
-                .reverse()
-                    .filter((order) => {
+                  {orders.filter((order) => {
                       return (
                         // order.Order_Status === "Shipped" ||
                         order.Order_Status === "Pending" || 0
