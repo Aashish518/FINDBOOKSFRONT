@@ -1,7 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import Cookies from "js-cookie";
 const token = Cookies.get("token");
-import { Linkurl } from "./Linkurl";
+import { Linkurl } from "../components/Linkurl";
 const backlink = Linkurl();
 
 const AuthContext = createContext();
