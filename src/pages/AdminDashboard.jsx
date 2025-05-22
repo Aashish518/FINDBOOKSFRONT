@@ -83,7 +83,7 @@ const AdminDashboard = () => {
     GetUser();
     const getOrders = async () => {
       try {
-        const response = await fetch(`${backlink}/api/Order`, {
+        const response = await fetch(`${backlink}/api/Orders`, {
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
