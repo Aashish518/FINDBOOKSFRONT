@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import "../pages-css/MyOrders.css";
 import { ProfileMenu } from "../components/ProfileMenu";
-import { Package, Calendar, CreditCard, Truck, XCircle } from "lucide-react";
+import { Package, Calendar, CreditCard, Truck } from "lucide-react";
 import Load from "../components/Load";
 import { useAlert } from "../Context/AlertContext";
 import { Linkurl } from "../components/Linkurl";
